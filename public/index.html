@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp-Like Chat App</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="chat">
+          <div id="chat-header">
+            <h1>Cyber Chat</h1>
+          </div>
+          <div id="username-container">
+            <input id="usernameInput" type="text" placeholder="Enter your name:">
+            <button id="joinButton">Connect</button>
+          </div>
+          <div id="chat-container">
+            <div id="messages-container"></div>
+            <div id="input-container">
+              <input id="messageInput" type="text" placeholder="Type your message...">
+              <button id="sendButton">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const usernameInput = document.getElementById('usernameInput');
+  const joinButton = document.getElementById('joinButton');
+  const chatContainer = document.getElementById('chat-container');
+  const messagesContainer = document.getElementById('messages-container');
+  const messageInput = document.getElementById('messageInput');
+  const sendButton = document.getElementById('sendButton');
+  
+  // Emoji map
+  const emojiMap = {
+    react: "⚛️",
+    woah: "😲",
+    hey: "👋",
+    lol: "😂",
+    like: "🤍",
+    congratulations: "🎉",
+  };
+
+  joinButton.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    if (username !== '') {
+      socket.emit('join', username);
+      chatContainer.style.display = 'block';
+      usernameInput.disabled = true;
+      joinButton.disabled = true;
+    }
+  });
+
+  sendButton.addEventListener('click', () => {
+    const message = messageInput.value;
+    if (message.trim() !== '') {
+      // Replace words with emojis
+      const messageWithEmojis = replaceWithEmojis(message);
+      
+      socket.emit('message', messageWithEmojis);
+      messageInput.value = '';
+    }
+  });
+
+  socket.on('userJoined', (message) => {
+    messagesContainer.innerHTML += `<p>${message}</p>`;
+    usernameInput.style.display = 'none';
+    joinButton.style.display = 'none';
+  });
+
+  socket.on('userLeft', (message) => {
+    messagesContainer.innerHTML += `<p>${message}</p>`;
+  });
+
+  socket.on('message', (message) => {
+    messagesContainer.innerHTML += `<p>${message}</p>`;
+  });
+
+  // Function to replace words with emojis
+  function replaceWithEmojis(message) {
+    const words = message.toLowerCase().split(' ');
+    const replacedWords = words.map(word => emojiMap[word] || word);
+    return replacedWords.join(' ');
+  }
+</script>
+
+
+
+</body>
+</html>

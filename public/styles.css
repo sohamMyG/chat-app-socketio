@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #292c36;
+    color: #b0b0b0;
+  }
+  
+  #container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background-image: url('https://static.vecteezy.com/system/resources/previews/004/736/599/non_2x/geometric-cube-seamless-pattern-black-and-white-wide-background-minimalist-concept-ready-for-your-backdrop-wallpaper-design-template-free-vector.jpg'); Add your background image URL */
+    background-color: #292c36;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  #chat {
+    max-width: 400px;
+    background-color: #292c36; /* Change to orangish color, e.g., #ff9900 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  #chat-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #1d1f27;
+    font-size: 24px;
+    color: #ff9900; /* Change to orangish color */
+  }
+  
+  #username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  #usernameInput,
+  #messageInput {
+    flex: 1;
+    padding: 10px;
+    background-color: #16171d;
+    border: 1px solid #ff9900; /* Change to orangish color */
+    border-radius: 5px;
+    margin: 5px;
+    color: #b0b0b0;
+  }
+  
+  #joinButton,
+  #sendButton {
+    padding: 10px 20px;
+    background-color: #ff9900; /* Change to orangish color */
+    color: #292c36;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #joinButton:hover,
+  #sendButton:hover {
+    background-color: #ffcc66; /* Lighter shade of orangish color */
+  }
+  
+  #messages-container {
+    max-height: 200px; /* Adjust as needed */
+    overflow-y: scroll;
+    padding: 10px;
+    border-bottom: 1px solid #ff9900; /* Change to orangish color */
+  }
+  
+  #input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #16171d;
+  }
+  
+  .chat-area p {
+    margin: 5px 0;
+  }
+  
